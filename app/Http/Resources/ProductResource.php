@@ -32,7 +32,7 @@ class ProductResource extends JsonResource
             'price' => [
                 'original' => $this->price,
                 'final' => $this->final_price != null ? $this->final_price : $this->price,
-                'discount_percentage' => $this->discount_percentage,
+                'discount_percentage' => $this->discount_percentage != null ? strval($this->discount_percentage) . '%' : $this->discount_percentage,
                 'currency' => 'EUR'
             ]
         ];
