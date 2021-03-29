@@ -7,16 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ProductResource extends JsonResource
 {
 
-    public static $wrap = 'product';
-    protected $finalPrice;
-    protected $discountPercentage;
-
-    public function getFinalPrice() {
-        $this->finalPrice = $this->price + 1;
-        $this->discountPercentage = '30';
-        return $this;
-    }
-
     /**
      * Transform the resource into an array.
      *
