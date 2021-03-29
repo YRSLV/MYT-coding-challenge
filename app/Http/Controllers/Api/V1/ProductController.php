@@ -22,16 +22,6 @@ class ProductController extends Controller
         $priceLessThan = $request->input('priceLessThan') ?? null;
 
 
-        // $this->validate($request, [
-            
-        //     'priceLessThan' => function ($attribute, $value, $fail) {
-        //         if (!is_int(intval($value)) || intval($value)==0) {
-        //             return $fail($attribute . ' should be non-zero positive integer.');
-        //         }
-        //     }
-            
-        // ]);
-
         $products = Product::query();
 
         if ($priceLessThan) {
@@ -48,7 +38,13 @@ class ProductController extends Controller
 
         return new ProductResourceCollection($products);
     }
-
+    
+    /**
+     * Calculate discounts for selected products
+     *
+     * @param  mixed $products
+     * @return void
+     */
     public function calculateDiscounts($products)
     {
         foreach ($products as $product) {
