@@ -1,0 +1,12 @@
+[
+    {
+        "discountable_type": "category",
+        "discountable_value": "boots",
+        "percent_off": 30
+    },
+    {
+        "discountable_type": "sku",
+        "discountable_value": "000003",
+        "percent_off": 15
+    }
+]
