@@ -157,9 +157,11 @@ Refer the [API Specification](#api-specification) for more info.
 
 ----------
 
-Release notes
+# Release notes
 
 Version 0.1.0 brings REST API endpoint complete implementation.
+
+Version 0.2.0 adds implementation for querying the Global Secondary Index and populating DB with products and discounts data. 
 
 ----------
 
