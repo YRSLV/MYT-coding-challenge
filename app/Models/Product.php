@@ -32,6 +32,27 @@ class Product extends DynamoDbModel
     protected $compositeKey = ['category', 'sku'];
 
     /**
+     * Indexes.
+     * [
+     *     '<simple_index_name>' => [
+     *          'hash' => '<index_key>'
+     *     ],
+     *     '<composite_index_name>' => [
+     *          'hash' => '<index_hash_key>',
+     *          'range' => '<index_range_key>'
+     *     ],
+     * ]
+     *
+     * @var array
+     */
+    protected $dynamoDbIndexKeys = [
+        'price-index' => [
+            'hash' => 'category',
+            'range' => 'price'
+        ],
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
