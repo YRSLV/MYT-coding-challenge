@@ -42,9 +42,9 @@ Generate a new application key
 
     php artisan key:generate
 
-This project uses Amazon DynamoDB, however you will still need to create MySQL database for the project (the default DB name would be 'myt_coding_challenge'), otherwise you won't be able to run migrations. The reason for this strange behaviour can be found in one of the [issue comments](https://github.com/baopham/laravel-dynamodb/issues/90#issuecomment-447594258) in the discussionson on baopham/laravel-dynamodb GitHub repository. "...As of this writing, the latest version of Laravel is 5.7. It wants to write to the migrations mysql table, even after commenting out any existing migrations bundled with Laravel". The same is true for Laravel 8.34.0 
+This project uses Amazon DynamoDB, however you will still need to create MySQL database for the project (the default DB name would be 'myt_coding_challenge'), otherwise you won't be able to run migrations. The reason for this strange behaviour can be found in one of the [issue comments](https://github.com/baopham/laravel-dynamodb/issues/90#issuecomment-447594258) in the discussionson on baopham/laravel-dynamodb GitHub repository. "...As of this writing, the latest version of Laravel is 5.7. It wants to write to the migrations mysql table, even after commenting out any existing migrations bundled with Laravel". The same is true for Laravel 8.34.0.
 
-Next, you will need to deploy a local downloadable version of Amazon DynamoDB. I used an executable .jar file, though other options are available. Please refer [Amazon Developer Guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html) for more info and installation manuals. To manage DynamoDB tables via GUI application you can use [Amazon NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html). Another option would be [dynamodb-admin](https://github.com/aaronshaf/dynamodb-admin), but NoSQL Workbench is way more robust and provides data modeling, data visualization, and query development features to help you design, create, query, and manage DynamoDB tables.
+Next, you will need to deploy a local downloadable version of Amazon DynamoDB. The first option involves using an executable .jar file, though other options are available. Please refer to [Amazon Developer Guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html) for more info and installation manuals. To manage DynamoDB tables via GUI application you can use [Amazon NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html). Another option would be [dynamodb-admin](https://github.com/aaronshaf/dynamodb-admin), but [NoSQL Workbench]((https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)) is way more robust and provides data modeling, data visualization, and query development features.
 
 Now you will need to start DynamoDB local server. For Windows executable .jar file version you will need to navigate to the directory where you extracted DynamoDBLocal.jar, and enter the following command
 
@@ -68,7 +68,7 @@ Start the local development server
 
     php artisan serve
 
-***Note*** : If you configured your DynamoDB local server to run on default port 8000 local development server will fail to listen on this port and will eventually start on port 8001.
+***Note*** : If you configured your DynamoDB local server to run on default port (which is 8000), the local development server will fail to listen on http://localhost:8000 and will eventually start on http://localhost:8001.
 
 You can now access the server at http://localhost:8000
 
@@ -79,6 +79,11 @@ You can now access the server at http://localhost:8000
     composer install
     cp .env.example .env
     php artisan key:generate 
+
+**Optional**
+
+    php database/data_loaders/loadProductsData.php
+    php database/data_loaders/loadDiscountsData.php
     
 **Make sure you set the correct database connection information before running the migrations and started DynamoDB local server** [Environment variables](#environment-variables)
 
@@ -100,12 +105,9 @@ From now on, the project is runnable with 1 simple command `php artisan serve` f
 - `app/Models` - Contains all the Eloquent models
 - `app/Http/Controllers/Api/V1` - Contains all the api controllers
 - `app/Http/Middleware` - Contains all the middleware
-- `app/Http/Requests/Api` - Contains all the api form requests
 - `config` - Contains all the application configuration files
 - `database/migrations` - Contains all the database migrations, both standard SQL and newly added DynamoDB migrations
 - `routes` - Contains all the api routes defined in api.php file
-- `tests` - Contains all the application tests
-- `tests/Feature/Api` - Contains all the api tests
 
 ## Environment variables
 
@@ -153,7 +155,6 @@ Response sample
 
 ![Image of API response sample](/resources/images/api_response_sample.png)
 
-Refer the [API Specification](#api-specification) for more info.
 
 ----------
 
