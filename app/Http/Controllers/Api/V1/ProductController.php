@@ -24,15 +24,16 @@ class ProductController extends Controller
 
         $products = Product::query();
 
-        if ($priceLessThan) {
-            $products->where('price', '<=', intval($priceLessThan));
-        }
-
         if ($category) {
             $products->where('category', $category);
         }
 
-        $products = $products->take(5)->get();
+        if ($priceLessThan) {
+            $products->where('price', '<=', intval($priceLessThan));
+        }
+
+
+        $products = $products->take(5)->withIndex('price-index')->get();
 
         $this->calculateDiscounts($products);
 
