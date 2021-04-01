@@ -108,6 +108,7 @@ From now on, the project is runnable with 1 simple command `php artisan serve` f
 - `config` - Contains all the application configuration files
 - `database/migrations` - Contains all the database migrations, both standard SQL and newly added DynamoDB migrations
 - `routes` - Contains all the api routes defined in api.php file
+- `tests` - Contains all the application tests
 
 ## Environment variables
 
@@ -126,7 +127,7 @@ If you decide to set these variables in .env, the list should look similar to th
 
 ----------
 
-# Testing API
+# API
 
 Run the laravel development server
 
@@ -158,11 +159,27 @@ Response sample
 
 ----------
 
+# Testing
+
+Tests are runnable with 1 command 🙂 (assuming of course that all prerequisites are met and all the necessary services are already started).
+
+You may run application tests using phpunit:
+
+    ./vendor/bin/phpunit
+
+In addition to the phpunit command, you may use the test Artisan command to run the tests. The Artisan test runner provides verbose test reports in order to ease development and debugging:
+
+    php artisan test
+
+----------
+
 # Release notes
 
 Version 0.1.0 brings REST API endpoint complete implementation.
 
-Version 0.2.0 adds implementation for querying the Global Secondary Index and populating DB with products and discounts data. 
+Version 0.2.0 adds implementation for querying the Global Secondary Index and populating DB with products and discounts data.
+
+Version 0.3.0 adds tests for API endpoint functionality and some small performance improvements
 
 ----------
 
