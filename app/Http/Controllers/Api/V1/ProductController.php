@@ -49,13 +49,9 @@ class ProductController extends Controller
     public function calculateDiscounts($products)
     {
         foreach ($products as $product) {
-            $categoryDiscounts = Discount::where('discountable_type', 'category')
-                                ->where('discountable_value',  $product['category'])
-                                ->get();
-            $skuDiscounts = Discount::where('discountable_type', 'sku')
-            ->where('discountable_value', $product['sku'])
-            ->get();
-
+            $categoryDiscounts = $this->getDiscountsForDiscountableItem('category', $product['category']);
+            $skuDiscounts = $this->getDiscountsForDiscountableItem('sku', $product['sku']);
+            
             $totalDiscount = null;
 
             if (!empty($categoryDiscounts[0])) {
@@ -70,5 +66,11 @@ class ProductController extends Controller
             $original_price = $product['price'];
             $product['final_price'] = $original_price - ($original_price * ($totalDiscount / 100));
         }
+    }
+
+    public function getDiscountsForDiscountableItem($discountableType, $discountableValue) {
+        return Discount::where('discountable_type', $discountableType,)
+                                ->where('discountable_value',  $discountableValue)
+                                ->get();
     }
 }
