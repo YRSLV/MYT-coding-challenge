@@ -154,7 +154,7 @@ Request sample
 
 Response sample
 
-![Image of API response sample](/resources/images/api_response_sample.png)
+![Image of API response sample](./docs/images/api_response_sample.png)
 
 
 ----------
@@ -185,6 +185,6 @@ Version 0.3.0 adds tests for API endpoint functionality and some small performan
 
 # Explanations on decisions taken
 
-🚧 Currently under construction 🚧
+See [EXPLANATIONS](./docs/EXPLANATIONS.md)
 
 __________
