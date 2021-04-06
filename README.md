@@ -154,7 +154,7 @@ Request sample
 
 Response sample
 
-![Image of API response sample](/resources/images/api_response_sample.png)
+![Image of API response sample](./docs/images/api_response_sample.png)
 
 
 ----------
@@ -181,10 +181,12 @@ Version 0.2.0 adds implementation for querying the Global Secondary Index and po
 
 Version 0.3.0 adds tests for API endpoint functionality and some small performance improvements
 
+Version 0.4.0 adds additional documentation with explanations on decisions taken
+
 ----------
 
 # Explanations on decisions taken
 
-🚧 Currently under construction 🚧
+See [EXPLANATIONS](./docs/EXPLANATIONS.md)
 
 __________
