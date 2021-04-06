@@ -12,7 +12,7 @@ Laravel is one of the best PHP frameworks in many respects, surpassing its rival
 
 # Controller
 
-The [ProductController](./app/Http/Controllers/Api/V1/ProductController.php) contains `index()` method and two methods used for applicable discount acquisition and calculation.
+The [ProductController](../app/Http/Controllers/Api/V1/ProductController.php) contains `index()` method and two methods used for applicable discount acquisition and calculation.
 
 calculateDiscounts() method uses foreach() loop (instead of array_map()) as the fastest approach for array traversal. Inside the loop, additional values (for keys:`$product['discount_percentage']`, `$product['final_price']`) are written to every product subarray to pass these values to ProductResource. Every selected  product will have those values added, so that we can access calculated product total discount percentage and final price inside ProductResource.
 
@@ -136,4 +136,4 @@ So, there is no point in slowing down tests even further.
 
 ----------
 
-
+⚠ ***Note*** This document may contain typos.
