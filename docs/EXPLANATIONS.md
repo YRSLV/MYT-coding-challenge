@@ -40,7 +40,16 @@ Amazon DynamoDB is a key-value and document database that delivers single-digit 
 
 DynamoDB is **schema-less**. This means that when you create a table, you do not define a rigid table schema, but only specify the attributes of the primary key, such as the partition key or the partition key and the sort key. You can add any type of attribute to any of the table elements at any time.
 
-In DynamoDB you start designing your database by analyzing access patterns. In this case we need to access all products, all products with given category or all products with given category and price less than or equal to one, provided by the user. We can't use `['category', 'sku']` as a composite primary key, because this pair of hash and range key won't uniquely identify an item (with 5 given elements that won't really matter, but as soon as someone adds a product within the same category with the same price it will cause problems), but we can use this pair as a secondary index;
+In DynamoDB you start designing your database by analyzing access patterns. In this case we need to access all products, all products with given category or all products with given category and price less than or equal to one, provided by the user. 
+
+I decided to go with multi-table approach for this project to optimize for time to market and flexibility of requirements.
+In the real production environment with all access patterns already defined single-table design would prevail to optimize for performance, scalability and efficient billing cost.
+
+## Products table
+
+Let's have a look at the `products` table.
+
+We can't use `['category', 'sku']` as a composite primary key, because this pair of hash and range key won't uniquely identify an item (with 5 given elements that won't really matter, but as soon as someone adds a product within the same category with the same price it will cause problems), but we can use this pair as a secondary index;
 
 While the primary key looks like this:
 
@@ -59,6 +68,7 @@ While the primary key looks like this:
     */
     protected $compositeKey = ['category', 'sku'];
 
+⚠ ***Note:*** primary key in this case is a composite key, consisting of hash and range key. baopham/laravel-dynamodb internal implementation of composite primary keys is the reason for defining primary key at first with the partition key `protected $primaryKey = 'discountable_type'` and then with a fully-fledged composite key `protected $compositeKey = ['discountable_type', 'discountable_value'`. In fact, `$primaryKey` should probably have been named `$partitionKey` to avoid confusion.
 
 Initially I planned to use one of the following two implementations of primary key, but the previous option with `protected $compositeKey = ['category', 'sku'];` showed slightly better performance for querying on DynamoDB Local instance, so I decided to leave it as it is for this challenge.
 
@@ -114,6 +124,30 @@ Finally the global secondary index looks like this:
     ];
 
 This secondary index was designed with future primary key changes in mind. In this particular case it is possible to use local secondary index instead of a global one, as the partition key is the same as in the index. But I decided to leave this secondary index global for better flexibility and separate throughput provisioning.
+
+
+## Discounts table
+
+Now let's glance at the `discounts` table.
+
+Overall design is pretty simple and satisfies required access patterns. Composite primary key looks like this:
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'discountable_type';
+
+    /**
+     * Array of your composite key.
+     * ['<hash>', '<range>']
+     *
+     * @var array
+     */
+    protected $compositeKey = ['discountable_type', 'discountable_value'];
+
+⚠ ***Note:*** primary key in this case is a composite key, consisting of hash and range key. baopham/laravel-dynamodb internal implementation of composite primary keys is the reason for defining primary key at first with the partition key `protected $primaryKey = 'discountable_type'` and then with a fully-fledged composite key `protected $compositeKey = ['discountable_type', 'discountable_value'`. In fact, `$primaryKey` should probably have been named `$partitionKey` to avoid confusion.
 
 ----------
 
