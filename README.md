@@ -181,6 +181,8 @@ Version 0.2.0 adds implementation for querying the Global Secondary Index and po
 
 Version 0.3.0 adds tests for API endpoint functionality and some small performance improvements
 
+Version 0.4.0 adds additional documentation with explanations on decisions taken
+
 ----------
 
 # Explanations on decisions taken
