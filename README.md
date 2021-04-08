@@ -10,9 +10,14 @@ MYT-coding-challenge
   * [Dependencies](#dependencies) 
   * [Folders](#folders)
   * [Environment variables](#environment-variables)
-* [Testing API](#testing-api)
-* [Dependencies](#dependencies)
-* [License](LICENSE)
+* [API](#api)
+  * [Request headers](#request-headers)
+  * [Request sample](#request-sample)
+  * [Response sample](#response-sample)
+* [Testing](#testing)
+* [Release notes](#release-notes)
+* [Explanations on decisions taken](#explanations-on-decisions-taken)
+* [License](#license)
 
 ----------
 
@@ -137,7 +142,7 @@ The api can now be accessed at
 
     http://localhost:8000/api/v1/products
 
-Request headers
+## Request headers
 
 | **Required** 	| **Key**              	| **Value**            	|
 |----------	|------------------	|------------------	|
@@ -148,11 +153,11 @@ Request headers
 discounts are applied and will show products with prices lesser than or equal to the value provided.
 * Returns at most 5 elements.
 
-Request sample
+## Request sample
 
     http://localhost:8000/api/v1/products?category=boots&priceLessThan=90000
 
-Response sample
+## Response sample
 
 ![Image of API response sample](./docs/images/api_response_sample.png)
 
@@ -171,6 +176,8 @@ In addition to the phpunit command, you may use the test Artisan command to run 
 
     php artisan test
 
+For more information regarding tests, please refer to [EXPLANATIONS](./docs/EXPLANATIONS.md).
+
 ----------
 
 # Release notes
@@ -179,9 +186,9 @@ Version 0.1.0 brings REST API endpoint complete implementation.
 
 Version 0.2.0 adds implementation for querying the Global Secondary Index and populating DB with products and discounts data.
 
-Version 0.3.0 adds tests for API endpoint functionality and some small performance improvements
+Version 0.3.0 adds tests for API endpoint functionality and some small performance improvements.
 
-Version 0.4.0 adds additional documentation with explanations on decisions taken
+Version 0.4.0 adds additional documentation with explanations on decisions taken.
 
 ----------
 
@@ -190,3 +197,7 @@ Version 0.4.0 adds additional documentation with explanations on decisions taken
 See [EXPLANATIONS](./docs/EXPLANATIONS.md)
 
 __________
+
+# License
+
+See [LICENSE](./LICENSE.md)
