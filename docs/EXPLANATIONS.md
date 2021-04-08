@@ -16,7 +16,7 @@ The [ProductController](../app/Http/Controllers/Api/V1/ProductController.php) co
 
 calculateDiscounts() method uses `foreach()` loop (instead of `array_map()`) as the fastest approach for array traversal. Inside the loop, additional values (for keys:`$product['discount_percentage']`, `$product['final_price']`) are written to every product subarray to pass these values to ProductResource. Every selected  product will have those values added, so that we can access calculated product total discount percentage and final price inside ProductResource.
 
-The `index()` method returns `ProductResourceCollection`, of`ProductResource`. `ProductResource` utilizes Eloquent's resource classes as a much more expressive and robust way for serializing Eloquent (in this case DynamoDB) models to *json* than just calling `toJson` methods on models or collections;
+The `index()` method returns `ProductResourceCollection`, of`ProductResource`. `ProductResource` utilizes Eloquent's resource classes as a much more expressive and robust way for serializing Eloquent (in this case DynamoDB) models to *json* than just calling `toJson` methods on models or collections.
 
 ----------
 
